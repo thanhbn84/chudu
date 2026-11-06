@@ -1,11 +1,11 @@
 {
-    "name": "Gấu Trúc Du Hành",
-    "short_name": "Gấu Trúc",
+    "name": "Chu Du – Học ngoại ngữ",
+    "short_name": "Chu Du",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFF8F0",
     "theme_color": "#784E30",
-    "description": "Phiêu lưu học tiếng Trung HSK 3+",
+    "description": "Phiêu lưu học ngoại ngữ cùng linh vật: tiếng Trung HSK, tiếng Anh KET/PET/IELTS",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
