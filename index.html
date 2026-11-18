@@ -22,6 +22,7 @@
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Chu Du">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
@@ -33,6 +34,29 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- iPhone/iPad never offer "install" for web apps: show how to add the app to the home screen -->
+  <div id="ios-a2hs" style="display:none;position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:9999;background:#FFF8F0;color:#3b2a1d;border:2px solid #784E30;border-radius:14px;padding:12px 40px 12px 14px;font:15px/1.4 -apple-system,system-ui,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.25)">
+    <b>Cài Chu Du lên màn hình chính</b><br>
+    Bấm nút <b>Chia sẻ</b> <span style="font-size:18px">&#x2B06;&#xFE0E;</span> (Safari: thanh dưới; Chrome: thanh địa chỉ),
+    rồi chọn <b>"Thêm vào MH chính"</b>.
+    <button id="ios-a2hs-close" aria-label="Đóng" style="position:absolute;top:6px;right:8px;border:0;background:none;font-size:22px;color:#784E30">&times;</button>
+  </div>
+  <script>
+    (function () {
+      var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var installed = navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+      var until = 0;
+      try { until = +localStorage.getItem('a2hsHiddenUntil') || 0; } catch (e) {}
+      if (!ios || installed || Date.now() < until) return;
+      var box = document.getElementById('ios-a2hs');
+      setTimeout(function () { box.style.display = 'block'; }, 3000);
+      document.getElementById('ios-a2hs-close').onclick = function () {
+        box.style.display = 'none';
+        // Ask again in a week
+        try { localStorage.setItem('a2hsHiddenUntil', Date.now() + 7 * 864e5); } catch (e) {}
+      };
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
